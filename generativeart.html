@@ -5,29 +5,35 @@
     #square {
       height: 400px;
       width: 400px;
-      border-color: black;
       border-style: solid;
       position: fixed;
     }
 
     #door {
       height: 100px;
-      width: 65px;
-      position: fixed;
-      border: solid black;
+      width: 55px;
+      border: solid;
       border-radius: 50% 50% 0% 0%; 
+      position: relative;
+      top: 297px;
+      left: 200px;
+      background-color: white;
     }
   </style>
 </head>
 <body>
    <script>
-    for (var i = 25; i > 0; i--) {
-      let div = document.createElement('div');
-
+    for (var i = 0; i < 25; i++) {
+      const div = document.createElement('div');
       div.id = "square";
-      let topPosition = i*10+35
-      let rgbFirst = i*10+35
-      let rgbSecond = i-25
+      const door = document.createElement('div')
+      door.id = "door"
+
+      const topPosition = i*10+35
+      const rgbFirst = i*10+35
+      const rgbSecond = i-25
+      const rgbFirstDoor = (25-i)*10+45
+      const rgbSecondDoor = (25-i)-35
 
 
       div.style = `
@@ -35,12 +41,17 @@
       left: ${topPosition}px;
       border-color: rgb(${rgbFirst},${rgbSecond},200);
       `
+      door.style = `
+      border-color: rgb(${rgbFirst},${rgbSecond},200);
+      border-bottom: solid white;
+      `
 
+      div.appendChild(door)
       document.body.appendChild(div);
       }
         
     </script>
-    <div id="door">
-    </div>
+    <!-- <div id="door">
+    </div> -->
 </body> 
 </html> 
