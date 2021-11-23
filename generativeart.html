@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <style>
+    #square {
+      height: 400px;
+      width: 400px;
+      border-color: black;
+      border-style: solid;
+      position: fixed;
+    }
+
+    #door {
+      height: 100px;
+      width: 65px;
+      position: fixed;
+      border: solid black;
+      border-radius: 50% 50% 0% 0%; 
+    }
+  </style>
+</head>
+<body>
+   <script>
+    for (var i = 25; i > 0; i--) {
+      let div = document.createElement('div');
+
+      div.id = "square";
+      let topPosition = i*10+35
+      let rgbFirst = i*10+35
+      let rgbSecond = i-25
+
+
+      div.style = `
+      top: ${topPosition}px; 
+      left: ${topPosition}px;
+      border-color: rgb(${rgbFirst},${rgbSecond},200);
+      `
+
+      document.body.appendChild(div);
+      }
+        
+    </script>
+    <div id="door">
+    </div>
+</body> 
+</html> 
