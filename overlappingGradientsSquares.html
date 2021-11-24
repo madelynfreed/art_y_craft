@@ -17,10 +17,37 @@
       left: 150px;
       background-color: white;
     }
+
+    #squareSegment {
+      position: fixed;
+      background-color: blueviolet;
+    }
   </style>
 </head>
 <body>
    <script>
+      const totalHeight = 400
+      const segmentNumbers = 15;
+      const segmentHeight = Math.round(totalHeight / (2 * segmentNumbers))
+
+      function topPosition(index) {
+        return index * segmentHeight * 2;
+      }
+
+      function renderGradientSquare() {
+        for (let index = 0; index < segmentNumbers; index++) {
+          const squareSegment = document.createElement('div');
+          squareSegment.id = 'squareSegment';
+
+          squareSegment.style = `
+          height: ${segmentHeight}px;
+          width: ${totalHeight}px;
+          top: ${topPosition(index)}px;
+          `;
+      document.body.appendChild(squareSegment);
+       }
+     }
+     renderGradientSquare();
     for (var i = 0; i < 3; i++) {
       const div = document.createElement('div');
       div.id = "square";
@@ -31,13 +58,10 @@
 
       const topPosition = i*50+40
       const rgbFirst = i*10+35
-      const rgbSecond = i-25
+      const rgbSecond = i*100+25
       const rgbFirstDoor = (25-i)*10+45
       const rgbSecondDoor = (25-i)-35
 
-
-      // border-color: rgb(${rgbFirst},${rgbSecond},200);
-      // background-image: linear-gradient(transparent 50%, white 0%);
       div.style = `
       top: ${topPosition}px; 
       left: ${topPosition}px;
@@ -48,20 +72,15 @@
       gradient.style = `
       top: ${topPosition}px; 
       left: ${topPosition}px;
-      background-image: linear-gradient(purple, orange);
+      background-image: linear-gradient(
+        rgb(${rgbFirst},${rgbSecond},200),
+        rgb(${rgbSecond},${rgbFirst},200)
+         );
       `
-      // cutout.style = `
-      // border-color: rgb(${rgbFirst},${rgbSecond},200);
-      // border-bottom: solid white;
-      // `
 
       div.appendChild(cutout);
-      document.body.appendChild(gradient);
-      document.body.appendChild(div);
       }
         
     </script>
-    <!-- <div id="cutout">
-    </div> -->
 </body> 
 </html> 
