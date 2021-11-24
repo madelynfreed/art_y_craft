@@ -1,0 +1,67 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <style>
+    #square {
+      height: 400px;
+      width: 400px;
+      position: fixed;
+      background-color: blueviolet;
+    }
+
+    #cutout {
+      height: 100px;
+      width: 100px;
+      position: relative;
+      top: 150px;
+      left: 150px;
+      background-color: white;
+    }
+  </style>
+</head>
+<body>
+   <script>
+    for (var i = 0; i < 3; i++) {
+      const div = document.createElement('div');
+      div.id = "square";
+      const gradient = document.createElement('div');
+      gradient.id = "square";
+      const cutout = document.createElement('div')
+      cutout.id = "cutout"
+
+      const topPosition = i*50+40
+      const rgbFirst = i*10+35
+      const rgbSecond = i-25
+      const rgbFirstDoor = (25-i)*10+45
+      const rgbSecondDoor = (25-i)-35
+
+
+      // border-color: rgb(${rgbFirst},${rgbSecond},200);
+      // background-image: linear-gradient(transparent 50%, white 0%);
+      div.style = `
+      top: ${topPosition}px; 
+      left: ${topPosition}px;
+      background-color: transparent;
+      background-image: linear-gradient(white 50%, transparent 0%);
+      background-size: 20px 20px;
+      `
+      gradient.style = `
+      top: ${topPosition}px; 
+      left: ${topPosition}px;
+      background-image: linear-gradient(purple, orange);
+      `
+      // cutout.style = `
+      // border-color: rgb(${rgbFirst},${rgbSecond},200);
+      // border-bottom: solid white;
+      // `
+
+      div.appendChild(cutout);
+      document.body.appendChild(gradient);
+      document.body.appendChild(div);
+      }
+        
+    </script>
+    <!-- <div id="cutout">
+    </div> -->
+</body> 
+</html> 
