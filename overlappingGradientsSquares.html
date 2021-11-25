@@ -3,10 +3,6 @@
 
 <head>
   <style>
-    #squareSegment {
-      position: fixed;
-      background-color: blueviolet;
-    }
     #gradient {
       height: 400px;
       width: 400px;
@@ -18,123 +14,49 @@
 
 <body>
   <script>
-    const totalHeight = 400
-    const segmentNumbers = 15;
-    const segmentHeight = Math.round(totalHeight / (2 * segmentNumbers))
-    const startingPosition = 50
-
-    function topPosition(index, startingPosition) {
-      return (index * segmentHeight * 2) + startingPosition;
-    }
-
-    function renderGraidentSegment(color, startingPosition, top) {
-      const squareSegment = document.createElement('div');
-      squareSegment.id = 'squareSegment';
-
-      squareSegment.style = `
-          background-color: ${color};
-            height: ${segmentHeight}px;
-            width: ${totalHeight}px;
-            top: ${top}px;
-            left: ${startingPosition}px;
-          `;
-      document.body.appendChild(squareSegment);
-
-    }
-
-    function renderGradientSquare(startingPosition) {
-      const color = [
-        "rgb(10,200,200)",
-        "rgb(150,200,200)",
-        "rgb(100,200,200)",
-        "rgb(100,200,200)",
-        "rgb(100,210,200)",
-        "rgb(100,220,200)",
-        "rgb(100,230,200)",
-        "rgb(100,240,200)",
-        "rgb(100,250,200)",
-        "rgb(100,260,200)",
-        "rgb(100,200,200)",
-        "rgb(100,200,200)",
-        "rgb(100,200,200)",
-        "rgb(100,200,200)",
-        "rgb(100,200,200)",
-        "rgb(100,200,200)",
-        "rgb(100,200,200)",
-    ];
-      for (let index = 0; index < segmentNumbers; index++) {
-        const top = topPosition(index, startingPosition);
-        renderGraidentSegment(color[index], startingPosition, top)
-      }
-    }
-
-    // renderGradientSquare(50);
-    // renderGradientSquare(50 + (segmentHeight * 7));
-    // renderGradientSquare(50 + 2 * (segmentHeight * 7));
-
-    for (var i = 0; i < 3; i++) {
-      console.log(i)
+    for (var i = 2; i >= 0; i--) {
       const gradient = document.createElement('div');
       gradient.id = "gradient";
 
       const topPosition = i * 50 + 40
       const rgbFirst = i * 10 + 35
       const rgbSecond = i * 100 + 25
-      const rgbFirstDoor = (25 - i) * 10 + 45
-      const rgbSecondDoor = (25 - i) - 35
-      console.log(topPosition)
+      const gradientString = [
+        "blue,green,red,orange",
+         "orange, purple",
+          "yellow, green"
+        ]
+      const linearGradientString = [
+        [
+          "217deg, rgba(255,0,0,.8), rgba(255,0,0,0) 70.71%",
+          "127deg, rgba(0,255,0,.8), rgba(0,255,0,0) 70.71%",
+          "336deg, rgba(0,0,255,.8), rgba(0,0,255,0) 70.71%",
+        ],
+        [
+          "217deg, rgba(0,255,0,.8), rgba(0,255,0,0) 70.71%",
+          "127deg, rgba(255,0,0,.8), rgba(255,0,0,0) 70.71%",
+          "336deg, rgba(0,0,255,.8), rgba(0,0,255,0) 70.71%",
+        ],
+        [
+          "217deg, rgba(0,0,255,.8), rgba(0,0,255,0) 70.71%",
+          "127deg, rgba(0,255,0,.8), rgba(0,255,0,0) 70.71%",
+          "336deg, rgba(255,0,0,.8), rgba(255,0,0,0) 70.71%",
+        ],
+      ]
 
       gradient.style = `
       top: ${topPosition}px; 
       left: ${topPosition}px;
-      background-image: linear-gradient(
-        rgb(${rgbFirst},${rgbSecond},200),
-        rgb(${rgbSecond},${rgbFirst},200)
-         );
-      clip-path: polygon(0% 0%, 0% 100%, 33% 100%, 33% 33%, 66% 33%, 66% 66%, 33% 66%, 33% 100%, 100% 100%, 100% 0%);
-      background-color: transparent;
+      background: linear-gradient(${linearGradientString[i][0]}),
+            linear-gradient(${linearGradientString[i][1]}),
+            linear-gradient(${linearGradientString[i][2]});
+      clip-path: polygon(0% 0%, 0% 100%, 30% 100%, 30% 30%, 70% 30%, 70% 70%, 30% 70%, 30% 100%, 100% 100%, 100% 0%);
       -webkit-mask-image: linear-gradient(white 50%, transparent 0%);
       -webkit-mask-size: 20px 20px;
       `
 
       document.body.appendChild(gradient);
     }
-
-    for (var i = 0; i < 3; i++) {
-      const div = document.createElement('div');
-      div.id = "square";
-      const gradient = document.createElement('div');
-      gradient.id = "square";
-      const cutout = document.createElement('div')
-      cutout.id = "cutout"
-
-      const topPosition = i * 50 + 40
-      const rgbFirst = i * 10 + 35
-      const rgbSecond = i * 100 + 25
-      const rgbFirstDoor = (25 - i) * 10 + 45
-      const rgbSecondDoor = (25 - i) - 35
-
-      div.style = `
-      top: ${topPosition}px; 
-      left: ${topPosition}px;
-      background-color: transparent;
-      background-image: linear-gradient(white 50%, transparent 0%);
-      background-size: 20px 20px;
-      clip-path: polygon(0% 0%, 0% 100%, 33% 100%, 33% 33%, 66% 33%, 66% 66%, 33% 66%, 33% 100%, 100% 100%, 100% 0%);
-      `
-      gradient.style = `
-      top: ${topPosition}px; 
-      left: ${topPosition}px;
-      background-image: linear-gradient(
-        rgb(${rgbFirst},${rgbSecond},200),
-        rgb(${rgbSecond},${rgbFirst},200)
-         );
-      `
-
-      div.appendChild(cutout);
-      // document.body.appendChild(gradient);
-    }
-
   </script>
 </body>
 
