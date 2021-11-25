@@ -7,6 +7,12 @@
       position: fixed;
       background-color: blueviolet;
     }
+    #gradient {
+      height: 400px;
+      width: 400px;
+      background-color: blueviolet;
+      position: fixed;
+    }
   </style>
 </head>
 
@@ -26,7 +32,7 @@
       squareSegment.id = 'squareSegment';
 
       squareSegment.style = `
-          background-color: rgb(100,200,225);
+          background-color: ${color};
             height: ${segmentHeight}px;
             width: ${totalHeight}px;
             top: ${top}px;
@@ -37,16 +43,61 @@
     }
 
     function renderGradientSquare(startingPosition) {
-      const color = "rgb(100,200,200)";
+      const color = [
+        "rgb(10,200,200)",
+        "rgb(150,200,200)",
+        "rgb(100,200,200)",
+        "rgb(100,200,200)",
+        "rgb(100,210,200)",
+        "rgb(100,220,200)",
+        "rgb(100,230,200)",
+        "rgb(100,240,200)",
+        "rgb(100,250,200)",
+        "rgb(100,260,200)",
+        "rgb(100,200,200)",
+        "rgb(100,200,200)",
+        "rgb(100,200,200)",
+        "rgb(100,200,200)",
+        "rgb(100,200,200)",
+        "rgb(100,200,200)",
+        "rgb(100,200,200)",
+    ];
       for (let index = 0; index < segmentNumbers; index++) {
         const top = topPosition(index, startingPosition);
-        renderGraidentSegment(color, startingPosition, top)
+        renderGraidentSegment(color[index], startingPosition, top)
       }
     }
 
-    renderGradientSquare(50);
-    renderGradientSquare(50 + (segmentHeight * 7));
-    renderGradientSquare(50 + 2 * (segmentHeight * 7));
+    // renderGradientSquare(50);
+    // renderGradientSquare(50 + (segmentHeight * 7));
+    // renderGradientSquare(50 + 2 * (segmentHeight * 7));
+
+    for (var i = 0; i < 3; i++) {
+      console.log(i)
+      const gradient = document.createElement('div');
+      gradient.id = "gradient";
+
+      const topPosition = i * 50 + 40
+      const rgbFirst = i * 10 + 35
+      const rgbSecond = i * 100 + 25
+      const rgbFirstDoor = (25 - i) * 10 + 45
+      const rgbSecondDoor = (25 - i) - 35
+      console.log(topPosition)
+
+      gradient.style = `
+      top: ${topPosition}px; 
+      left: ${topPosition}px;
+      background-image: linear-gradient(
+        rgb(${rgbFirst},${rgbSecond},200),
+        rgb(${rgbSecond},${rgbFirst},200)
+         );
+      clip-path: polygon(0% 0%, 0% 100%, 33% 100%, 33% 33%, 66% 33%, 66% 66%, 33% 66%, 33% 100%, 100% 100%, 100% 0%);
+      clip-path: ellipse(20% 11% at 74% 84%);
+      `
+
+      document.body.appendChild(gradient);
+    }
+
     for (var i = 0; i < 3; i++) {
       const div = document.createElement('div');
       div.id = "square";
@@ -67,6 +118,7 @@
       background-color: transparent;
       background-image: linear-gradient(white 50%, transparent 0%);
       background-size: 20px 20px;
+      clip-path: polygon(0% 0%, 0% 100%, 33% 100%, 33% 33%, 66% 33%, 66% 66%, 33% 66%, 33% 100%, 100% 100%, 100% 0%);
       `
       gradient.style = `
       top: ${topPosition}px; 
@@ -78,6 +130,7 @@
       `
 
       div.appendChild(cutout);
+      // document.body.appendChild(gradient);
     }
 
   </script>
