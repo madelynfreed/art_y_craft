@@ -92,7 +92,9 @@
         rgb(${rgbSecond},${rgbFirst},200)
          );
       clip-path: polygon(0% 0%, 0% 100%, 33% 100%, 33% 33%, 66% 33%, 66% 66%, 33% 66%, 33% 100%, 100% 100%, 100% 0%);
-      clip-path: ellipse(20% 11% at 74% 84%);
+      background-color: transparent;
+      -webkit-mask-image: linear-gradient(white 50%, transparent 0%);
+      -webkit-mask-size: 20px 20px;
       `
 
       document.body.appendChild(gradient);
