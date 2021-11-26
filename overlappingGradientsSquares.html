@@ -3,6 +3,11 @@
 
 <head>
   <style>
+    body {
+      background:
+      linear-gradient(rgba(29, 17, 22, 0.9), rgba(29, 17, 22, 0.9)),
+      url('images/noise.svg');
+    }
     #gradient {
       height: 400px;
       width: 400px;
@@ -18,7 +23,7 @@
       const gradient = document.createElement('div');
       gradient.id = "gradient";
 
-      const topPosition = i * 50 + 40
+      const topPosition = i * 38 + 40
       const rgbFirst = i * 10 + 35
       const rgbSecond = i * 100 + 25
       const gradientString = [
@@ -26,22 +31,32 @@
          "orange, purple",
           "yellow, green"
         ]
+
+        const yellowRgb = "rgba(208,241,78,"
+        const redRgb = "rgba(228,51,69,"
+        const blueRgb = "rgba(30,197,253,"
+        function concatFullColor(color) {
+          return `${color}1), ${color}0) 60%`
+        }
+        function concatNoColor(color) {
+          return ``
+        }
       const linearGradientString = [
         [
-          "217deg, rgba(255,0,0,.8), rgba(255,0,0,0) 70.71%",
-          "127deg, rgba(0,255,0,.8), rgba(0,255,0,0) 70.71%",
-          "336deg, rgba(0,0,255,.8), rgba(0,0,255,0) 70.71%",
+          `217deg, ${concatFullColor(blueRgb)}`,
+          `127deg, ${concatFullColor(redRgb)}`,
+          `336deg, ${concatFullColor(yellowRgb)}`,
         ],
         [
-          "217deg, rgba(0,255,0,.8), rgba(0,255,0,0) 70.71%",
-          "127deg, rgba(255,0,0,.8), rgba(255,0,0,0) 70.71%",
-          "336deg, rgba(0,0,255,.8), rgba(0,0,255,0) 70.71%",
+          `217deg, ${concatFullColor(redRgb)}`,
+          `127deg, ${concatFullColor(yellowRgb)}`,
+          `336deg, ${concatFullColor(blueRgb)}`,
         ],
         [
-          "217deg, rgba(0,0,255,.8), rgba(0,0,255,0) 70.71%",
-          "127deg, rgba(0,255,0,.8), rgba(0,255,0,0) 70.71%",
-          "336deg, rgba(255,0,0,.8), rgba(255,0,0,0) 70.71%",
-        ],
+          `217deg, ${concatFullColor(yellowRgb)}`,
+          `127deg, ${concatFullColor(blueRgb)}`,
+          `336deg, ${concatFullColor(redRgb)}`,
+        ]
       ]
 
       gradient.style = `
@@ -52,7 +67,7 @@
             linear-gradient(${linearGradientString[i][2]});
       clip-path: polygon(0% 0%, 0% 100%, 30% 100%, 30% 30%, 70% 30%, 70% 70%, 30% 70%, 30% 100%, 100% 100%, 100% 0%);
       -webkit-mask-image: linear-gradient(white 50%, transparent 0%);
-      -webkit-mask-size: 20px 20px;
+      -webkit-mask-size: 15px 15px;
       `
 
       document.body.appendChild(gradient);
