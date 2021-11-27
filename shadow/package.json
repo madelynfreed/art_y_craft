@@ -1,0 +1,18 @@
+{
+  "name": "shadow",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "dependencies": {
+    "compass": "^0.1.1",
+    "compass-mixins": "^0.12.10",
+    "sass": "^1.43.5",
+    "sass-math-pow": "^0.1.7"
+  },
+  "devDependencies": {},
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "author": "",
+  "license": "ISC"
+}

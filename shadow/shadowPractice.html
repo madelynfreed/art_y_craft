@@ -1,0 +1,60 @@
+<html>
+
+<head>
+  <title> Import example of sass</title>
+  <link rel="stylesheet" type="text/css" href="style.css" />
+  <style>
+    body {
+      background-color: lavender;
+    }
+
+    .trapezoid {
+      position: absolute;
+      width: 600px;
+      height: 600px;
+      background: red;
+    }
+
+    .shadow {
+      position: absolute;
+      width: 600px;
+      height: 600px;
+      background: red;
+    }
+  </style>
+</head>
+
+<body>
+  <script>
+    const topHeight = "100px";
+    const trapezoidTop = "67"
+    const point1 = "81% 100%"
+    const point2 = "81% 83%"
+    const point3 = "100% 83%"
+    const point4 = `99% ${trapezoidTop}%`
+    const point5 = "78% 67%"
+    const point6 = "77% 84%"
+    const point7 = `90% ${trapezoidTop}%`
+    const point8 = "54% 33%"
+    const point9 = "33% 33%"
+    const point10 = "34% 52%"
+    const trapezoid = document.createElement('div');
+    trapezoid.className = "trapezoid";
+    trapezoid.style = `
+      clip-path: polygon(${point1},${point2},${point3},${point4},${point5}, ${point6});
+      background: blue;
+      top: ${topHeight};
+      `
+    const shadow = document.createElement('div');
+    shadow.className = "shadow"
+    shadow.style = `
+      clip-path: polygon(${point1}, ${point6}, ${point5}, ${point7}, ${point8}, ${point9}, ${point10});
+      top: ${topHeight};
+    `
+    document.body.appendChild(trapezoid);
+    document.body.appendChild(shadow);
+
+  </script>
+</body>
+
+</html>
