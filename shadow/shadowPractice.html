@@ -26,34 +26,56 @@
 
 <body>
   <script>
-    const topHeight = "100px";
-    const trapezoidTop = "67"
-    const point1 = "81% 100%"
+    const coordinates = [
+      ["100px","300px"],
+      ["300px","200px"],
+      ["500px","100px"],
+      ["700px","200px"],
+      ["900px","300px"],
+      ["700px","400px"],
+      ["500px","500px"],
+      ["300px","400px"],
+    ]
+    for (let index = 0; index < coordinates.length; index++) {
+      const element = coordinates[index];
+      
+    const leftWidth = element[0];
+    const topHeight = element[1];
+    const trapezoidTop = "80"
+
+    const bottomCorner = "81% 100%"
     const point2 = "81% 83%"
     const point3 = "100% 83%"
-    const point4 = `99% ${trapezoidTop}%`
-    const point5 = "78% 67%"
-    const point6 = "77% 84%"
-    const point7 = `90% ${trapezoidTop}%`
-    const point8 = "54% 33%"
-    const point9 = "33% 33%"
-    const point10 = "34% 52%"
+
+    const topRightTrapezoid = `99% ${trapezoidTop-index}%`
+    const topLeftTrapezoidCornerShadow = `78% ${trapezoidTop-index}%`
+    const midLeftTrapezoidCornerShadow = "77% 84%"
+    const midRightShadow = `90% ${trapezoidTop-index}%`
+    const topRightShadow = "54% 33%"
+    const topLeftShadow = "33% 33%"
+    const midLeftShadow = "34% 52%"
+
     const trapezoid = document.createElement('div');
     trapezoid.className = "trapezoid";
+    trapezoid.id = index;
     trapezoid.style = `
-      clip-path: polygon(${point1},${point2},${point3},${point4},${point5}, ${point6});
+      clip-path: polygon(${bottomCorner},${point2},${point3},${topRightTrapezoid},${topLeftTrapezoidCornerShadow}, ${midLeftTrapezoidCornerShadow});
       background: blue;
       top: ${topHeight};
+      left: ${leftWidth};
       `
     const shadow = document.createElement('div');
     shadow.className = "shadow"
+    shadow.id = "index"
     shadow.style = `
-      clip-path: polygon(${point1}, ${point6}, ${point5}, ${point7}, ${point8}, ${point9}, ${point10});
+      clip-path: polygon(${bottomCorner}, ${midLeftTrapezoidCornerShadow}, ${topLeftTrapezoidCornerShadow}, ${midRightShadow}, ${topRightShadow}, ${topLeftShadow}, ${midLeftShadow});
       top: ${topHeight};
+      left: ${leftWidth};
     `
     document.body.appendChild(trapezoid);
     document.body.appendChild(shadow);
 
+    }
   </script>
 </body>
 
