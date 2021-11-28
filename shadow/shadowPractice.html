@@ -21,6 +21,10 @@
       height: 600px;
       background: red;
     }
+
+    .shadowTag {
+      filter: drop-shadow(-6px -6px 2px purple);
+    }
   </style>
 </head>
 
@@ -41,19 +45,23 @@
       
     const leftWidth = element[0];
     const topHeight = element[1];
-    const trapezoidTop = "80"
-
+    const trapezoidTop = 80
+    const shadowTop = 70;
+    const topRightTrapXPosition = 99;
+    const topRightShadowXPosition = 84;
+    const topLength = 22
+    const trapezoidHeight = 20;
     const bottomCorner = "81% 100%"
     const point2 = "81% 83%"
     const point3 = "100% 83%"
 
-    const topRightTrapezoid = `99% ${trapezoidTop-index}%`
-    const topLeftTrapezoidCornerShadow = `78% ${trapezoidTop-index}%`
-    const midLeftTrapezoidCornerShadow = "77% 84%"
+    const topRightTrapezoid = `${topRightTrapXPosition}% ${trapezoidTop-index}%`
+    const topLeftTrapezoidCornerShadow = `${topRightTrapXPosition-topLength}% ${trapezoidTop-index}%`
+    const midLeftTrapezoidCornerShadow = "78% 90%"
     const midRightShadow = `90% ${trapezoidTop-index}%`
-    const topRightShadow = "54% 33%"
-    const topLeftShadow = "33% 33%"
-    const midLeftShadow = "34% 52%"
+    const topRightShadow = `${topRightShadowXPosition}% ${shadowTop-index}%`
+    const topLeftShadow = `${topRightShadowXPosition-topLength}% ${shadowTop-index}%`
+    const midLeftShadow = `${topRightShadowXPosition-topLength-1}% ${shadowTop+trapezoidHeight-index}%`
 
     const trapezoid = document.createElement('div');
     trapezoid.className = "trapezoid";
@@ -64,6 +72,7 @@
       top: ${topHeight};
       left: ${leftWidth};
       `
+    
     const shadow = document.createElement('div');
     shadow.className = "shadow"
     shadow.id = "index"
@@ -71,9 +80,14 @@
       clip-path: polygon(${bottomCorner}, ${midLeftTrapezoidCornerShadow}, ${topLeftTrapezoidCornerShadow}, ${midRightShadow}, ${topRightShadow}, ${topLeftShadow}, ${midLeftShadow});
       top: ${topHeight};
       left: ${leftWidth};
+      z-index: 2;
     `
+    const shadowTag = document.createElement('div');
+    shadowTag.className = "shadowTag";
+    shadowTag.appendChild(shadow);
+
     document.body.appendChild(trapezoid);
-    document.body.appendChild(shadow);
+    document.body.appendChild(shadowTag);
 
     }
   </script>
