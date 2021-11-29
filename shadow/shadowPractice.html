@@ -58,7 +58,8 @@
     const topRightTrapezoid = `${topRightTrapXPosition}% ${trapezoidTop-index}%`
     const topLeftTrapezoidCornerShadow = `${topRightTrapXPosition-topLength}% ${trapezoidTop-index}%`
     const midLeftTrapezoidCornerShadow = "78% 90%"
-    const midRightShadow = `90% ${trapezoidTop-index}%`
+    // const midRightShadow = `90% ${trapezoidTop-index}%`
+    const midRightShadow = point3;
     const topRightShadow = `${topRightShadowXPosition}% ${shadowTop-index}%`
     const topLeftShadow = `${topRightShadowXPosition-topLength}% ${shadowTop-index}%`
     const midLeftShadow = `${topRightShadowXPosition-topLength-1}% ${shadowTop+trapezoidHeight-index}%`
@@ -86,8 +87,8 @@
     shadowTag.className = "shadowTag";
     shadowTag.appendChild(shadow);
 
-    document.body.appendChild(trapezoid);
     document.body.appendChild(shadowTag);
+    document.body.appendChild(trapezoid);
 
     }
   </script>
