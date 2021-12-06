@@ -16,44 +16,53 @@
 			height: 100%;
 			position: relative;
 			transform-style: preserve-3d;
+			transition: transform 1s;
 		}
 
 		.cube__face {
 			position: absolute;
 			width: 200px;
 			height: 200px;
+			opacity: 40%;
 		}
 
 		.cube__face--front {
 			transform: rotateY(  0deg) translateZ(100px);
-			background-color: rgb(127, 168, 73); 
-			opacity: 40%;
+			background-color: rgb(221, 79, 74); 
 		}
 
 		.cube__face--right {
 			transform: rotateY( 90deg) translateZ(100px);
-			background-color: lightgreen; 
+			background-color: rgb(233, 162, 80); 
 		}
 
 		.cube__face--back {
 			transform: rotateY(180deg) translateZ(100px);
-			background-color: rgb(180, 144, 238); 
+			background-color: rgb(238, 236, 120); 
 		}
 
 		.cube__face--left {
 			transform: rotateY(-90deg) translateZ(100px);
-			background-color: rgb(68, 43, 85); 
+			background-color: rgb(129, 241, 94); 
 		}
 
 		.cube__face--top {
 			transform: rotateX( 90deg) translateZ(100px);
-			background-color: rgb(238, 144, 207); 
+			background-color: rgb(84, 178, 233); 
 		}
 
 		.cube__face--bottom {
 			transform: rotateX(-90deg) translateZ(100px);
 			background-color: rgb(163, 69, 93); 
 		}
+
+		.cube.show-front  { transform: translateZ(-100px) rotateY(   0deg); }
+		.cube.show-right  { transform: translateZ(-100px) rotateY( -90deg); }
+		.cube.show-back   { transform: translateZ(-100px) rotateY(-180deg); }
+		.cube.show-left   { transform: translateZ(-100px) rotateY(  90deg); }
+		.cube.show-top    { transform: translateZ(-100px) rotateX( -90deg); }
+		.cube.show-bottom { transform: translateZ(-100px) rotateX(  90deg); }
+
 		</style>
 		</head>
 <body>
@@ -67,6 +76,22 @@
 			<div class="cube__face cube__face--bottom">bottom</div>
 		</div>
 	</div>
+	<script>
+		var cube = document.querySelector('.cube');
+		var counter = 0;
+		const directionList = ['front', 'right', 'back', 'left', 'top', 'bottom'];
+
+		function changeSide() {
+			var currentClass = 'show-' + directionList[counter];
+			cube.classList.remove(currentClass)
+			counter = (counter + 1)%6;
+			var showClass = 'show-' + directionList[counter];
+			console.log(cube.classList)
+			cube.classList.add(showClass);
+		}
+
+		document.addEventListener('click', changeSide);
+	</script>
 </body>
 
 </html>
