@@ -45,18 +45,19 @@
       
     const leftWidth = element[0];
     const topHeight = element[1];
-    const trapezoidTop = 80
-    const shadowTop = 70;
+    const trapezoidTop = 80 - index;
+    const shadowTop = trapezoidTop - 8;
     const topRightTrapXPosition = 99;
     const topRightShadowXPosition = 84;
     const topLength = 22
-    const trapezoidHeight = 20;
+    const trapezoidHeight = 90-trapezoidTop;
+    console.log(trapezoidHeight)
     const bottomCorner = "81% 100%"
     const point2 = "81% 83%"
     const point3 = "100% 83%"
 
-    const topRightTrapezoid = `${topRightTrapXPosition}% ${trapezoidTop-index}%`
-    const topLeftTrapezoidCornerShadow = `${topRightTrapXPosition-topLength}% ${trapezoidTop-index}%`
+    const topRightTrapezoid = `${topRightTrapXPosition}% ${trapezoidTop}%`
+    const topLeftTrapezoidCornerShadow = `${topRightTrapXPosition-topLength}% ${trapezoidTop}%`
     const midLeftTrapezoidCornerShadow = "78% 90%"
     // const midRightShadow = `90% ${trapezoidTop-index}%`
     const midRightShadow = point3;

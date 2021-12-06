@@ -11,7 +11,6 @@
     #gradient {
       height: 400px;
       width: 400px;
-      background-color: blueviolet;
       position: fixed;
     }
   </style>
@@ -64,7 +63,8 @@
       left: ${topPosition}px;
       background: linear-gradient(${linearGradientString[i][0]}),
             linear-gradient(${linearGradientString[i][1]}),
-            linear-gradient(${linearGradientString[i][2]});
+            linear-gradient(${linearGradientString[i][2]})
+            ;
       clip-path: polygon(0% 0%, 0% 100%, 30% 100%, 30% 30%, 70% 30%, 70% 70%, 30% 70%, 30% 100%, 100% 100%, 100% 0%);
       -webkit-mask-image: linear-gradient(white 50%, transparent 0%);
       -webkit-mask-size: 15px 15px;
