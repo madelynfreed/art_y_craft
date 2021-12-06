@@ -23,40 +23,42 @@
 			position: absolute;
 			width: 200px;
 			height: 200px;
-			opacity: 40%;
+			/* opacity: 40%; */
 		}
 
 		.cube__face--front {
-			transform: rotateY(  0deg) translateZ(100px);
-			background-color: rgb(221, 79, 74); 
+			transform: rotateX(-45deg) rotateY(0deg) translateZ(100px);
 		}
 
 		.cube__face--right {
-			transform: rotateY( 90deg) translateZ(100px);
-			background-color: rgb(233, 162, 80); 
+			transform: rotateX(45deg) rotateY(90deg) translateZ(100px);
 		}
 
 		.cube__face--back {
-			transform: rotateY(180deg) translateZ(100px);
+			transform: rotateX(135deg) rotateY(0deg) translateZ(100px);
 			background-color: rgb(238, 236, 120); 
 		}
 
 		.cube__face--left {
-			transform: rotateY(-90deg) translateZ(100px);
+			transform: rotateX(-45deg) rotateY(-90deg) translateZ(100px);
 			background-color: rgb(129, 241, 94); 
 		}
 
+		.cube__shadow--left {
+			transform: skew(-40deg) rotateX(-135deg) rotateY(0deg) translateX(-200px) translateZ(100px);
+			background-color: rgb(31, 59, 22); 
+		}
+
 		.cube__face--top {
-			transform: rotateX( 90deg) translateZ(100px);
-			background-color: rgb(84, 178, 233); 
+			transform: rotateX( 45deg) rotateY(0deg) translateZ(100px);
 		}
 
 		.cube__face--bottom {
-			transform: rotateX(-90deg) translateZ(100px);
+			transform: rotateX(-135deg) rotateY(0deg) translateZ(100px);
 			background-color: rgb(163, 69, 93); 
 		}
 
-		.cube.show-front  { transform: translateZ(-100px) rotateY(   0deg); }
+		.cube.show-front  { transform: translateZ(-100px) rotateY(  0deg); }
 		.cube.show-right  { transform: translateZ(-100px) rotateY( -90deg); }
 		.cube.show-back   { transform: translateZ(-100px) rotateY(-180deg); }
 		.cube.show-left   { transform: translateZ(-100px) rotateY(  90deg); }
@@ -72,6 +74,7 @@
 			<div class="cube__face cube__face--back">back</div>
 			<div class="cube__face cube__face--right">right</div>
 			<div class="cube__face cube__face--left">left</div>
+			<div class="cube__face cube__shadow--left">left</div>
 			<div class="cube__face cube__face--top">top</div>
 			<div class="cube__face cube__face--bottom">bottom</div>
 		</div>
@@ -86,7 +89,6 @@
 			cube.classList.remove(currentClass)
 			counter = (counter + 1)%6;
 			var showClass = 'show-' + directionList[counter];
-			console.log(cube.classList)
 			cube.classList.add(showClass);
 		}
 
