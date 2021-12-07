@@ -87,16 +87,7 @@
 		}
 
 		// document.addEventListener('click', changeSide);
-
-		function getCoordinate([cube_side, ySide],[other_cube_side, xSide]) {
-			const yelement = document.querySelector(`.cube__face--${cube_side}`);
-			const r = yelement.getBoundingClientRect()
-			const y = r[ySide]
-
-			const xelement = document.querySelector(`.cube__face--${other_cube_side}`);
-			const s = xelement.getBoundingClientRect()
-			const x = s[xSide]
-
+		function appendDiv(x,y) {
 			const shadowTag = document.createElement('div');
 			shadowTag.style = `
 				background-color: blue;
@@ -106,18 +97,36 @@
 				top: ${y};
 				left: ${x};
 			`
-			console.log(x,y)
-
 			document.body.appendChild(shadowTag);
-
 		}
-		// getB1('bottom', 'bottom','left')
+
+		function getCoordinate([cube_side, ySide],[other_cube_side, xSide]) {
+			const yelement = document.querySelector(`.cube__face--${cube_side}`);
+			const r = yelement.getBoundingClientRect()
+			const y = Math.round(r[ySide])
+
+			const xelement = document.querySelector(`.cube__face--${other_cube_side}`);
+			const s = xelement.getBoundingClientRect()
+			const x = Math.round(s[xSide])
+
+			appendDiv(x,y)
+			return {x,y}
+		}
+
+		function getLightSource({x,y}) {
+			lightx = x+500;
+			lighty = y-100;
+			appendDiv(lightx,lighty)
+			return {lightx,lighty}
+		}
 		const b1 = getCoordinate(['bottom','bottom'],['bottom','left'])
 		const b2 = getCoordinate(['bottom','top'],['left','right'])
 		const b3 = getCoordinate(['bottom','top'],['right','left'])
 		const t1 = getCoordinate(['front','top'],['front','left'])
 		const t2 = getCoordinate(['back','top'],['back','left'])
 		const t3 = getCoordinate(['back','top'],['back','right'])
+
+		const lt = getLightSource(t3)
 
 	</script>
 </body>
