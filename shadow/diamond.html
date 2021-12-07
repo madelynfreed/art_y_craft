@@ -98,11 +98,10 @@
 			const x = s[xSide]
 
 			const shadowTag = document.createElement('div');
-			shadowTag.className = "shadowTag";
 			shadowTag.style = `
 				background-color: blue;
-				height: 100px;
-				width: 100px;
+				height: 10px;
+				width: 10px;
 				position: absolute;
 				top: ${y};
 				left: ${x};
@@ -116,6 +115,9 @@
 		const b1 = getCoordinate(['bottom','bottom'],['bottom','left'])
 		const b2 = getCoordinate(['bottom','top'],['left','right'])
 		const b3 = getCoordinate(['bottom','top'],['right','left'])
+		const t1 = getCoordinate(['front','top'],['front','left'])
+		const t2 = getCoordinate(['back','top'],['back','left'])
+		const t3 = getCoordinate(['back','top'],['back','right'])
 
 	</script>
 </body>
