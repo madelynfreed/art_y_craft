@@ -6,12 +6,14 @@
   "dependencies": {
     "compass": "^0.1.1",
     "compass-mixins": "^0.12.10",
+    "jest": "^27.4.3",
+    "jest-environment-jsdom": "^27.4.4",
     "sass": "^1.43.5",
     "sass-math-pow": "^0.1.7"
   },
   "devDependencies": {},
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "test": "jest --watch"
   },
   "author": "",
   "license": "ISC"
