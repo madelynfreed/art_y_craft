@@ -15,7 +15,7 @@ function changeSide() {
 }
 
 // document.addEventListener('click', changeSide);
-function appendDiv(x, y) {
+function appendDiv(x, y, logIt = false) {
 	const shadowTag = document.createElement('div');
 	shadowTag.style = `
 				background-color: blue;
@@ -25,6 +25,9 @@ function appendDiv(x, y) {
 				top: ${y}px;
 				left: ${x}px;
 			`
+	if (logIt) {
+		console.log(x,y)
+	}
 	document.body.appendChild(shadowTag);
 }
 
@@ -49,16 +52,19 @@ function getLightSource(coordinates, yDiff) {
 	return { x, y }
 }
 
+function getFormula(coordinate1, coordinate2) {
+return 'loo'
+}
 function getIntersectionCoordinates(
 	lightSource,
 	coordinateTop,
 	lightBottom,
 	coordinateBottom,
 ) {
-	// const { lightSourceX, lightSourceY } = lightSource
-	// { coordinateTopX, coordinateTopY },
-	// { lightBottomX, lightBottomY },
-	// { coordinateBottomX, coordinateBottomY },
+	// console.log("lightSource",  {lightSource} )
+	// console.log("coordinateTop",  {coordinateTop} )
+	// console.log("lightBottom",  {lightBottom} )
+	// console.log("coordinateBottom",  {coordinateBottom} )
 	const lightSourceX = lightSource.x
 	const lightSourceY = lightSource.y
 	const coordinateTopX = coordinateTop.x
@@ -67,12 +73,12 @@ function getIntersectionCoordinates(
 	const lightBottomY = lightBottom.y
 	const coordinateBottomX = coordinateBottom.x
 	const coordinateBottomY = coordinateBottom.y
-	console.log(arguments)
+
 	const m1 = (lightSourceY - coordinateTopY) / (lightSourceX - coordinateTopX)
 	const m2 = (lightBottomY - coordinateBottomY) / (lightBottomX - coordinateBottomX)
 	console.log(m1, m2)
 	const b1 = lightSourceY - (m1 * lightSourceX)
-	const b2 = lightSourceY - (m2 * lightSourceX)
+	const b2 = lightBottomY - (m2 * lightBottomX)
 	console.log(b1, b2)
 	console.log(`y = ${m1}x + ${b1}`)
 	console.log(`y = ${m2}x + ${b2}`)
@@ -81,7 +87,7 @@ function getIntersectionCoordinates(
 	console.log(x, y)
 	// const x = 100
 	// const y = 100
-	appendDiv(x, y)
+	appendDiv(x, y, true)
 	return { x, y }
 }
 function orchestrateCoordinates() {
@@ -99,4 +105,4 @@ function orchestrateCoordinates() {
 
 }
 
-module.exports = { testTest }
+module.exports = { getFormula, getIntersectionCoordinates, testTest, orchestrateCoordinates }
