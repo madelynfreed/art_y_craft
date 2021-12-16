@@ -5,16 +5,10 @@
 		body {
 			background-color: darkmagenta;
 		}
-		.shadow {
-			width: 1000px;
-			height: 1000px;
-			background-color: rgb(228, 158, 228);
-			clip-path: polygon(420px 641px,117px 590px,164px 396px,405px 402px,601px 500px,439px 500px);
-		}
 		.scene {
-			width: 200px;
-			height: 200px;
-			background-color: gray;
+			width: 100px;
+			height: 100px;
+			/* background-color: gray; */
 			perspective: 600px;
 			position: absolute;
 			top: 400px;
@@ -32,35 +26,53 @@
 
 		.cube__face {
 			position: absolute;
-			width: 200px;
-			height: 200px;
+			width: 100px;
+			height: 100px;
 			/* opacity: 40%; */
 		}
 
 		.cube__face--front {
-			transform: rotateX(-45deg) rotateY(0deg) translateZ(100px);
+			transform: rotateX(-45deg) rotateY(0deg) translateZ(50px);
 		}
 
 		.cube__face--right {
-			transform: rotateX(45deg) rotateY(90deg) translateZ(100px);
+			transform: rotateX(45deg) rotateY(90deg) translateZ(50px);
 		}
 
 		.cube__face--back {
-			transform: rotateX(135deg) rotateY(0deg) translateZ(100px);
-			background-color: rgb(238, 236, 120); 
+			transform: rotateX(135deg) rotateY(0deg) translateZ(50px);
+			/* background-color: rgb(120, 238, 130);  */
+			/* clip-path: polygon(0 0, 100% 0, 100% 61%, 0 61%); */
+		}
+		.cube__child--back {
+			/* transform: rotateX(135deg) rotateY(0deg) translateZ(50px); */
+			background-color: rgb(120, 157, 238); 
+			height: 40%;
+			/* clip-path: polygon(0 0, 100% 0, 100% 61%, 0 61%); */
 		}
 
+		.cube__child--left {
+			/* transform: rotateX(135deg) rotateY(0deg) translateZ(50px); */
+			background-color: rgb(120, 157, 238); 
+			height: 40%;
+			width: 100%;
+			bottom: 0;
+			right: 0;
+			position: absolute;
+			/* clip-path: polygon(0 0, 100% 0, 100% 61%, 0 61%); */
+		}
 		.cube__face--left {
-			transform: rotateX(-45deg) rotateY(-90deg) translateZ(100px);
-			background-color: rgb(129, 241, 94); 
+			transform: rotateX(-45deg) rotateY(-90deg) translateZ(50px);
+			/* background-color: rgb(129, 241, 94);  */
+			/* clip-path: polygon(0 38%, 100% 39%, 100% 100%, 0 100%); */
 		}
 
 		.cube__face--top {
-			transform: rotateX( 45deg) rotateY(0deg) translateZ(100px);
+			transform: rotateX( 45deg) rotateY(0deg) translateZ(50px);
 		}
 
 		.cube__face--bottom {
-			transform: rotateX(-135deg) rotateY(0deg) translateZ(100px);
+			transform: rotateX(-135deg) rotateY(0deg) translateZ(50px);
 			background-color: rgb(163, 69, 93); 
 		}
 
@@ -77,9 +89,17 @@
 	<div class="scene">
 		<div class="cube">
 			<div class="cube__face cube__face--front">front</div>
-			<div class="cube__face cube__face--back">back</div>
+			<div class="cube__face cube__face--back">
+				<div class="cube__child--back">
+					back
+				</div>
+			</div>
 			<div class="cube__face cube__face--right">right</div>
-			<div class="cube__face cube__face--left">left</div>
+			<div class="cube__face cube__face--left">
+				<div class="cube__child--left">
+					left
+				</div>
+			</div>
 			<div class="cube__face cube__face--top">top</div>
 			<div class="cube__face cube__face--bottom">bottom</div>
 		</div>

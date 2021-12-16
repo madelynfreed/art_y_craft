@@ -19,13 +19,13 @@ function appendDiv(x, y, logIt = false) {
 	const shadowTag = document.createElement('div');
 	shadowTag.style = `
 				background-color: blue;
-				height: 10px;
-				width: 10px;
 				position: absolute;
 				top: ${y}px;
 				left: ${x}px;
 			`
 	if (logIt) {
+		shadowTag.style.height = '10px'
+		shadowTag.style.width = '10px'
 		console.log(x,y)
 	}
 	document.body.appendChild(shadowTag);
@@ -40,12 +40,11 @@ function getCoordinate([cube_side, ySide], [other_cube_side, xSide]) {
 	const s = xelement.getBoundingClientRect()
 	const x = Math.round(s[xSide])
 
-	appendDiv(x, y)
+	appendDiv(x, y, true)
 	return { x, y }
 }
 
 function getLightSource(coordinates, yDiff) {
-	console.log(coordinates)
 	const x = coordinates.x + 500;
 	const y = coordinates.y + yDiff;
 	appendDiv(x, y)
@@ -61,10 +60,6 @@ function getIntersectionCoordinates(
 	lightBottom,
 	coordinateBottom,
 ) {
-	// console.log("lightSource",  {lightSource} )
-	// console.log("coordinateTop",  {coordinateTop} )
-	// console.log("lightBottom",  {lightBottom} )
-	// console.log("coordinateBottom",  {coordinateBottom} )
 	const lightSourceX = lightSource.x
 	const lightSourceY = lightSource.y
 	const coordinateTopX = coordinateTop.x
@@ -76,17 +71,12 @@ function getIntersectionCoordinates(
 
 	const m1 = (lightSourceY - coordinateTopY) / (lightSourceX - coordinateTopX)
 	const m2 = (lightBottomY - coordinateBottomY) / (lightBottomX - coordinateBottomX)
-	console.log(m1, m2)
 	const b1 = lightSourceY - (m1 * lightSourceX)
 	const b2 = lightBottomY - (m2 * lightBottomX)
-	console.log(b1, b2)
-	console.log(`y = ${m1}x + ${b1}`)
-	console.log(`y = ${m2}x + ${b2}`)
+	// console.log(`y = ${m1}x + ${b1}`)
+	// console.log(`y = ${m2}x + ${b2}`)
 	const x = Math.round((b2 - b1) / (m1 - m2))
 	const y = Math.round(m1 * x + b1)
-	console.log(x, y)
-	// const x = 100
-	// const y = 100
 	appendDiv(x, y, true)
 	return { x, y }
 }
@@ -115,6 +105,7 @@ function orchestrateCoordinates() {
 			z-index: -5;
 			`
 	document.body.appendChild(shadowTag);
+	console.log({b1})
 	console.log(`${b1.x}px ${b1.y}px,${intersection1.x}px ${intersection1.y}px,${intersection2.x}px ${intersection2.y}px,${intersection3.x}px ${intersection3.y}px,${b3.x}px ${b3.y}px,${b2.x}px ${b2.y}px`)
 }
 
