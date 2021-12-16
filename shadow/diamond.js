@@ -82,14 +82,15 @@ function getIntersectionCoordinates(
 	console.log(b1, b2)
 	console.log(`y = ${m1}x + ${b1}`)
 	console.log(`y = ${m2}x + ${b2}`)
-	const x = (b2 - b1) / (m1 - m2)
-	const y = m1 * x + b1
+	const x = Math.round((b2 - b1) / (m1 - m2))
+	const y = Math.round(m1 * x + b1)
 	console.log(x, y)
 	// const x = 100
 	// const y = 100
 	appendDiv(x, y, true)
 	return { x, y }
 }
+
 function orchestrateCoordinates() {
 	const b1 = getCoordinate(['bottom', 'bottom'], ['bottom', 'left'])
 	const b2 = getCoordinate(['bottom', 'top'], ['left', 'right'])
@@ -102,7 +103,19 @@ function orchestrateCoordinates() {
 	const lb = getLightSource(t3, 400)
 
 	const intersection1 = getIntersectionCoordinates(lt, t1, lb, b1);
+	const intersection2 = getIntersectionCoordinates(lt, t2, lb, b2);
+	const intersection3 = getIntersectionCoordinates(lt, t3, lb, b3);
 
+	const shadowTag = document.createElement('div');
+	shadowTag.style = `
+			width: 1000px;
+			height: 1000px;
+			background-color: blue;
+			clip-path: polygon(${b1.x}px ${b1.y}px,${intersection1.x}px ${intersection1.y}px,${intersection2.x}px ${intersection2.y}px,${intersection3.x}px ${intersection3.y}px,${b3.x}px ${b3.y}px,${b2.x}px ${b2.y}px);
+			z-index: -5;
+			`
+	document.body.appendChild(shadowTag);
+	console.log(`${b1.x}px ${b1.y}px,${intersection1.x}px ${intersection1.y}px,${intersection2.x}px ${intersection2.y}px,${intersection3.x}px ${intersection3.y}px,${b3.x}px ${b3.y}px,${b2.x}px ${b2.y}px`)
 }
 
 module.exports = { getFormula, getIntersectionCoordinates, testTest, orchestrateCoordinates }

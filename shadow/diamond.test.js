@@ -19,7 +19,7 @@ describe('changeSide', () => {
 			coordinateTop,
 			lightBottom,
 			coordinateBottom
-		)).toStrictEqual({"x": 920, "y": 59})
+		)).toStrictEqual({"x": -83, "y": 390})
 	})
 
 	it('getFormula', () => {

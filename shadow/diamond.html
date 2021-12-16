@@ -2,13 +2,24 @@
 <html>
 <head>
 	<style>
+		body {
+			background-color: darkmagenta;
+		}
+		.shadow {
+			width: 1000px;
+			height: 1000px;
+			background-color: rgb(228, 158, 228);
+			clip-path: polygon(420px 641px,117px 590px,164px 396px,405px 402px,601px 500px,439px 500px);
+		}
 		.scene {
 			width: 200px;
 			height: 200px;
+			background-color: gray;
 			perspective: 600px;
 			position: absolute;
-			top: 300px;
-			left:320px;
+			top: 400px;
+			left:420px;
+			z-index: 1;
 		}
 
 		.cube {
