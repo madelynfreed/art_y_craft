@@ -81,6 +81,18 @@ function getIntersectionCoordinates(
 	return { x, y }
 }
 
+function drawShadow(b1, b2, b3, intersection1, intersection2, intersection3) {
+	const shadowTag = document.createElement('div');
+	shadowTag.style = `
+			width: 1000px;
+			height: 1000px;
+			background-color: green;
+			clip-path: polygon(${b1.x}px ${b1.y}px,${intersection1.x}px ${intersection1.y}px,${intersection2.x}px ${intersection2.y}px,${intersection3.x}px ${intersection3.y}px,${b3.x}px ${b3.y}px,${b2.x}px ${b2.y}px);
+			z-index: -5;
+			`
+	document.body.appendChild(shadowTag);
+}
+
 function orchestrateCoordinates() {
 	const b1 = getCoordinate(['bottom', 'bottom'], ['bottom', 'left'])
 	const b2 = getCoordinate(['bottom', 'top'], ['left', 'right'])
@@ -96,15 +108,7 @@ function orchestrateCoordinates() {
 	const intersection2 = getIntersectionCoordinates(lt, t2, lb, b2);
 	const intersection3 = getIntersectionCoordinates(lt, t3, lb, b3);
 
-	const shadowTag = document.createElement('div');
-	shadowTag.style = `
-			width: 1000px;
-			height: 1000px;
-			background-color: blue;
-			clip-path: polygon(${b1.x}px ${b1.y}px,${intersection1.x}px ${intersection1.y}px,${intersection2.x}px ${intersection2.y}px,${intersection3.x}px ${intersection3.y}px,${b3.x}px ${b3.y}px,${b2.x}px ${b2.y}px);
-			z-index: -5;
-			`
-	document.body.appendChild(shadowTag);
+	drawShadow(b1, b2, b3, intersection1, intersection2, intersection3)
 	console.log({b1})
 	console.log(`${b1.x}px ${b1.y}px,${intersection1.x}px ${intersection1.y}px,${intersection2.x}px ${intersection2.y}px,${intersection3.x}px ${intersection3.y}px,${b3.x}px ${b3.y}px,${b2.x}px ${b2.y}px`)
 }
