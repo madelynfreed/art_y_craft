@@ -3,7 +3,7 @@
 <head>
 	<style>
 		body {
-			background-color: darkmagenta;
+			background-color: rgb(223, 197, 223);
 		}
 		.scene {
 			width: 100px;
@@ -46,15 +46,24 @@
 		}
 		.cube__child--back {
 			/* transform: rotateX(135deg) rotateY(0deg) translateZ(50px); */
-			background-color: rgb(120, 157, 238); 
-			height: 40%;
+			background-color: rgb(111, 152, 240); 
+			height: 90%;
+			animation-name: example;
+			animation-duration: 4s;
+			animation-direction: alternate;
+			animation-iteration-count: infinite;
 			/* clip-path: polygon(0 0, 100% 0, 100% 61%, 0 61%); */
+		}
+
+		@keyframes example {
+			from {height: 10%;}
+			to {height: 100%;}
 		}
 
 		.cube__child--left {
 			/* transform: rotateX(135deg) rotateY(0deg) translateZ(50px); */
-			background-color: rgb(120, 157, 238); 
-			height: 40%;
+			background-color: rgb(165, 188, 236); 
+			height: 90%;
 			width: 100%;
 			bottom: 0;
 			right: 0;
@@ -88,20 +97,20 @@
 <body>
 	<div class="scene">
 		<div class="cube">
-			<div class="cube__face cube__face--front">front</div>
+			<div class="cube__face cube__face--front cube__child--front">front</div>
 			<div class="cube__face cube__face--back">
 				<div class="cube__child--back">
 					back
 				</div>
 			</div>
-			<div class="cube__face cube__face--right">right</div>
+			<div class="cube__face cube__face--right cube__child--right">right</div>
 			<div class="cube__face cube__face--left">
 				<div class="cube__child--left">
 					left
 				</div>
 			</div>
-			<div class="cube__face cube__face--top">top</div>
-			<div class="cube__face cube__face--bottom">bottom</div>
+			<div class="cube__face cube__face--top cube__child--top">top</div>
+			<div class="cube__face cube__face--bottom cube__child--bottom">bottom</div>
 		</div>
 	</div>
 	<script

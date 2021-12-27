@@ -32,20 +32,20 @@ function appendDiv(x, y, logIt = false) {
 }
 
 function getCoordinate([cube_side, ySide], [other_cube_side, xSide]) {
-	const yelement = document.querySelector(`.cube__face--${cube_side}`);
+	const yelement = document.querySelector(`.cube__child--${cube_side}`);
 	const r = yelement.getBoundingClientRect()
 	const y = Math.round(r[ySide])
 
-	const xelement = document.querySelector(`.cube__face--${other_cube_side}`);
+	const xelement = document.querySelector(`.cube__child--${other_cube_side}`);
 	const s = xelement.getBoundingClientRect()
 	const x = Math.round(s[xSide])
 
-	appendDiv(x, y, true)
+	appendDiv(x, y)
 	return { x, y }
 }
 
 function getLightSource(coordinates, yDiff) {
-	const x = coordinates.x + 500;
+	const x = coordinates.x + 1000;
 	const y = coordinates.y + yDiff;
 	appendDiv(x, y)
 	return { x, y }
@@ -77,7 +77,7 @@ function getIntersectionCoordinates(
 	// console.log(`y = ${m2}x + ${b2}`)
 	const x = Math.round((b2 - b1) / (m1 - m2))
 	const y = Math.round(m1 * x + b1)
-	appendDiv(x, y, true)
+	appendDiv(x, y)
 	return { x, y }
 }
 
