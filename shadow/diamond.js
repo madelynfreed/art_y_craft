@@ -81,16 +81,25 @@ function getIntersectionCoordinates(
 	return { x, y }
 }
 
+const shadowTag = document.querySelector('#shadow')
 function drawShadow(b1, b2, b3, intersection1, intersection2, intersection3) {
-	const shadowTag = document.createElement('div');
 	shadowTag.style = `
-			width: 1000px;
-			height: 1000px;
+			width: 100vw;
+			height: 100vh;
 			background-color: green;
 			clip-path: polygon(${b1.x}px ${b1.y}px,${intersection1.x}px ${intersection1.y}px,${intersection2.x}px ${intersection2.y}px,${intersection3.x}px ${intersection3.y}px,${b3.x}px ${b3.y}px,${b2.x}px ${b2.y}px);
 			z-index: -5;
 			`
-	document.body.appendChild(shadowTag);
+	// document.body.appendChild(shadowTag);
+}
+
+function resizeObserver() {
+	const resizeObserver = new ResizeObserver(entries => {
+		console.log(entries[0].target.getBoundingClientRect())
+		orchestrateCoordinates()
+	})
+	resizeObserver.observe(document.querySelector('.cube__child--back'))
+	resizeObserver.observe(document.querySelector('.cube__child--left'))
 }
 
 function orchestrateCoordinates() {
@@ -110,7 +119,7 @@ function orchestrateCoordinates() {
 
 	drawShadow(b1, b2, b3, intersection1, intersection2, intersection3)
 	console.log({b1})
-	console.log(`${b1.x}px ${b1.y}px,${intersection1.x}px ${intersection1.y}px,${intersection2.x}px ${intersection2.y}px,${intersection3.x}px ${intersection3.y}px,${b3.x}px ${b3.y}px,${b2.x}px ${b2.y}px`)
 }
-
+	
+resizeObserver()
 module.exports = { getFormula, getIntersectionCoordinates, testTest, orchestrateCoordinates }
