@@ -83,6 +83,13 @@ function getIntersectionCoordinates(
 
 const shadowTag = document.querySelector('#shadow')
 function drawShadow(b1, b2, b3, intersection1, intersection2, intersection3) {
+	// appendDiv(b1.x, b1.y, true)
+	// appendDiv(b2.x, b2.y, true)
+	// appendDiv(b3.x, b3.y, true)
+	// appendDiv(intersection1.x, intersection1.y, true)
+	// ^ this is the one
+	// appendDiv(intersection2.x, intersection2.y, true)
+	// appendDiv(intersection3.x, intersection3.y, true)
 	shadowTag.style = `
 			width: 100vw;
 			height: 100vh;
@@ -95,30 +102,30 @@ function drawShadow(b1, b2, b3, intersection1, intersection2, intersection3) {
 
 function resizeObserver() {
 	const resizeObserver = new ResizeObserver(entries => {
-		console.log(entries[0].target.getBoundingClientRect())
+		// console.log(entries[0].target.getBoundingClientRect())
 		orchestrateCoordinates()
 	})
 	resizeObserver.observe(document.querySelector('.cube__child--back'))
 	resizeObserver.observe(document.querySelector('.cube__child--left'))
+	resizeObserver.observe(document.querySelector('.cube__face--front'))
 }
 
 function orchestrateCoordinates() {
 	const b1 = getCoordinate(['bottom', 'bottom'], ['bottom', 'left'])
 	const b2 = getCoordinate(['bottom', 'top'], ['left', 'right'])
 	const b3 = getCoordinate(['bottom', 'top'], ['right', 'left'])
-	const t1 = getCoordinate(['front', 'top'], ['front', 'left'])
+	const t1 = getCoordinate(['front', 'bottom'], ['front', 'left'])
 	const t2 = getCoordinate(['back', 'top'], ['back', 'left'])
 	const t3 = getCoordinate(['back', 'top'], ['back', 'right'])
 
-	const lt = getLightSource(t3, -100)
-	const lb = getLightSource(t3, 400)
+	const lt = {x: 1520, y: 234}
+	const lb = {x: 1520, y: 734}
 
 	const intersection1 = getIntersectionCoordinates(lt, t1, lb, b1);
 	const intersection2 = getIntersectionCoordinates(lt, t2, lb, b2);
 	const intersection3 = getIntersectionCoordinates(lt, t3, lb, b3);
 
 	drawShadow(b1, b2, b3, intersection1, intersection2, intersection3)
-	console.log({b1})
 }
 	
 resizeObserver()
