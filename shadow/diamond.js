@@ -58,9 +58,7 @@ function resizeObserver() {
 		// console.log(entries[0].target.getBoundingClientRect())
 		orchestrateCoordinates()
 	})
-	resizeObserver.observe(document.querySelector('.cube__child--back'))
-	resizeObserver.observe(document.querySelector('.cube__child--left'))
-	resizeObserver.observe(document.querySelector('.cube__face--front'))
+	resizeObserver.observe(document.querySelector('.animate'))
 }
 
 function orchestrateCoordinates() {
