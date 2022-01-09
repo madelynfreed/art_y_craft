@@ -1,20 +1,3 @@
-
-function testTest() {
-	return "testy"
-}
-
-function changeSide() {
-	var cube = document.querySelector('.cube');
-	var counter = 0;
-	const directionList = ['front', 'right', 'back', 'left', 'top', 'bottom'];
-	var currentClass = 'show-' + directionList[counter];
-	cube.classList.remove(currentClass)
-	counter = (counter + 1) % 6;
-	var showClass = 'show-' + directionList[counter];
-	cube.classList.add(showClass);
-}
-
-// document.addEventListener('click', changeSide);
 function appendDiv(x, y, logIt = false) {
 	const shadowTag = document.createElement('div');
 	shadowTag.style = `
@@ -40,56 +23,27 @@ function getCoordinate([cube_side, ySide], [other_cube_side, xSide]) {
 	const s = xelement.getBoundingClientRect()
 	const x = Math.round(s[xSide])
 
-	appendDiv(x, y)
+	// appendDiv(x, y)
 	return { x, y }
 }
 
-function getLightSource(coordinates, yDiff) {
-	const x = coordinates.x + 1000;
-	const y = coordinates.y + yDiff;
-	appendDiv(x, y)
-	return { x, y }
-}
-
-function getFormula(coordinate1, coordinate2) {
-return 'loo'
-}
 function getIntersectionCoordinates(
 	lightSource,
 	coordinateTop,
 	lightBottom,
 	coordinateBottom,
 ) {
-	const lightSourceX = lightSource.x
-	const lightSourceY = lightSource.y
-	const coordinateTopX = coordinateTop.x
-	const coordinateTopY = coordinateTop.y
-	const lightBottomX = lightBottom.x
-	const lightBottomY = lightBottom.y
-	const coordinateBottomX = coordinateBottom.x
-	const coordinateBottomY = coordinateBottom.y
-
-	const m1 = (lightSourceY - coordinateTopY) / (lightSourceX - coordinateTopX)
-	const m2 = (lightBottomY - coordinateBottomY) / (lightBottomX - coordinateBottomX)
-	const b1 = lightSourceY - (m1 * lightSourceX)
-	const b2 = lightBottomY - (m2 * lightBottomX)
-	// console.log(`y = ${m1}x + ${b1}`)
-	// console.log(`y = ${m2}x + ${b2}`)
+	const m1 = (lightSource.y - coordinateTop.y) / (lightSource.x - coordinateTop.x)
+	const m2 = (lightBottom.y - coordinateBottom.y) / (lightBottom.x - coordinateBottom.x)
+	const b1 = lightSource.y - (m1 * lightSource.x)
+	const b2 = lightBottom.y - (m2 * lightBottom.x)
 	const x = Math.round((b2 - b1) / (m1 - m2))
 	const y = Math.round(m1 * x + b1)
-	appendDiv(x, y)
 	return { x, y }
 }
 
 const shadowTag = document.querySelector('#shadow')
 function drawShadow(b1, b2, b3, intersection1, intersection2, intersection3) {
-	// appendDiv(b1.x, b1.y, true)
-	// appendDiv(b2.x, b2.y, true)
-	// appendDiv(b3.x, b3.y, true)
-	// appendDiv(intersection1.x, intersection1.y, true)
-	// ^ this is the one
-	// appendDiv(intersection2.x, intersection2.y, true)
-	// appendDiv(intersection3.x, intersection3.y, true)
 	shadowTag.style = `
 			width: 100vw;
 			height: 100vh;
@@ -97,7 +51,6 @@ function drawShadow(b1, b2, b3, intersection1, intersection2, intersection3) {
 			clip-path: polygon(${b1.x}px ${b1.y}px,${intersection1.x}px ${intersection1.y}px,${intersection2.x}px ${intersection2.y}px,${intersection3.x}px ${intersection3.y}px,${b3.x}px ${b3.y}px,${b2.x}px ${b2.y}px);
 			z-index: -5;
 			`
-	// document.body.appendChild(shadowTag);
 }
 
 function resizeObserver() {

@@ -41,56 +41,10 @@
 
 		.cube__face--back {
 			transform: rotateX(135deg) rotateY(0deg) translateZ(50px);
-			/* background-color: rgb(120, 238, 130);  */
-			/* clip-path: polygon(0 0, 100% 0, 100% 61%, 0 61%); */
-		}
-		.cube__child--back {
-			/* transform: rotateX(135deg) rotateY(0deg) translateZ(50px); */
-			background-color: rgb(111, 152, 240); 
-			height: 90%;
-			animation-name: example;
-			animation-duration: 10s;
-			animation-direction: alternate;
-			animation-iteration-count: infinite;
-			/* clip-path: polygon(0 0, 100% 0, 100% 61%, 0 61%); */
 		}
 
-		@keyframes example {
-			from {height: 100%;}
-			to {height: 10%;}
-		}
-		@keyframes reverseExample {
-			from {height: 10%;}
-			to {height: 100%;}
-		}
-
-		.cube__child--left {
-			/* transform: rotateX(135deg) rotateY(0deg) translateZ(50px); */
-			background-color: rgb(165, 188, 236); 
-			height: 90%;
-			width: 100%;
-			bottom: 0;
-			right: 0;
-			position: absolute;
-			animation-name: example;
-			animation-duration: 10s;
-			animation-direction: alternate;
-			animation-iteration-count: infinite;
-			/* clip-path: polygon(0 0, 100% 0, 100% 61%, 0 61%); */
-		}
-		.cube__child--front {
-			transform: rotate(.5turn);
-			height: 90%;
-			animation-name: reverseExample;
-			animation-duration: 10s;
-			animation-direction: alternate;
-			animation-iteration-count: infinite;
-
-		}
 		.cube__face--left {
 			transform: rotateX(-45deg) rotateY(-90deg) translateZ(50px);
-			/* background-color: rgb(129, 241, 94);  */
-			/* clip-path: polygon(0 38%, 100% 39%, 100% 100%, 0 100%); */
 		}
 
 		.cube__face--top {
@@ -101,7 +55,40 @@
 			transform: rotateX(-135deg) rotateY(0deg) translateZ(50px);
 			background-color: rgb(163, 69, 93); 
 		}
+		.cube__child--back {
+			background-color: rgb(111, 152, 240); 
+			animation-name: example;
+		}
 
+		.animate {
+			height: 90%;
+			animation-duration: 4s;
+			animation-direction: alternate;
+			animation-iteration-count: infinite;
+
+		}
+
+		.cube__child--left {
+			background-color: rgb(165, 188, 236); 
+			width: 100%;
+			bottom: 0;
+			right: 0;
+			position: absolute;
+			animation-name: example;
+		}
+		.cube__child--front {
+			transform: rotate(.5turn);
+			animation-name: reverseExample;
+		}
+
+		@keyframes example {
+			from {height: 100%;}
+			to {height: 10%;}
+		}
+		@keyframes reverseExample {
+			from {height: 10%;}
+			to {height: 100%;}
+		}
 		.cube.show-front  { transform: translateZ(-100px) rotateY(  0deg); }
 		.cube.show-right  { transform: translateZ(-100px) rotateY( -90deg); }
 		.cube.show-back   { transform: translateZ(-100px) rotateY(-180deg); }
@@ -115,18 +102,18 @@
 	<div class="scene">
 		<div class="cube">
 			<div class="cube__face cube__face--front">
-				<div class="cube__child--front">
+				<div class="cube__child--front animate">
 					front
 				</div>
 			</div>
 			<div class="cube__face cube__face--back">
-				<div class="cube__child--back">
+				<div class="cube__child--back animate">
 					back
 				</div>
 			</div>
 			<div class="cube__face cube__face--right cube__child--right">right</div>
 			<div class="cube__face cube__face--left">
-				<div class="cube__child--left">
+				<div class="cube__child--left animate">
 					left
 				</div>
 			</div>
