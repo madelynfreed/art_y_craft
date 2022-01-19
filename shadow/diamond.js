@@ -1,3 +1,33 @@
+const shadowColor = `blue`
+
+function createCubeScene() {
+	const scene = document.createElement('div');
+	const cube = document.createElement('div');
+	const cube_front = document.createElement('div');
+	const cube_back = document.createElement('div');
+	const cube_right = document.createElement('div');
+	const cube_left = document.createElement('div');
+	const cube_top = document.createElement('div');
+	const cube_bottom = document.createElement('div');
+	const child_front = document.createElement('div');
+	const child_back = document.createElement('div');
+	const child_left = document.createElement('div');
+
+	scene.setAttribute("class", "scene")
+	cube.setAttribute('class', 'cube' );
+	cube_front.setAttribute('class','cube__face cube__face--front');
+	cube_back.setAttribute('class','cube__face cube__face--back');
+	cube_right.setAttribute('class','cube__face cube__face--right');
+	cube_left.setAttribute('class','cube__face cube__face--left');
+	cube_top.setAttribute('class','cube__face cube__face--top');
+	cube_bottom.setAttribute('class','cube__face cube__face--bottom');
+	child_front.setAttribute('class', 'cube__child--front animate');
+	child_back.setAttribute('class', 'cube__child--back animate');
+	child_left.setAttribute('class', 'cube__child--left animate');
+
+	scene.appendChild(cube)
+	cube.append(cube_front, cube_back, cube_right, cube_left, cube_top, cube_bottom)
+}
 function appendDiv(x, y, logIt = false) {
 	const shadowTag = document.createElement('div');
 	shadowTag.style = `
@@ -23,7 +53,6 @@ function getCoordinate([cube_side, ySide], [other_cube_side, xSide]) {
 	const s = xelement.getBoundingClientRect()
 	const x = Math.round(s[xSide])
 
-	// appendDiv(x, y)
 	return { x, y }
 }
 
@@ -47,7 +76,7 @@ function drawShadow(b1, b2, b3, intersection1, intersection2, intersection3) {
 	shadowTag.style = `
 			width: 100vw;
 			height: 100vh;
-			background-color: green;
+			background-color: ${shadowColor};
 			clip-path: polygon(${b1.x}px ${b1.y}px,${intersection1.x}px ${intersection1.y}px,${intersection2.x}px ${intersection2.y}px,${intersection3.x}px ${intersection3.y}px,${b3.x}px ${b3.y}px,${b2.x}px ${b2.y}px);
 			z-index: -5;
 			`
@@ -55,7 +84,6 @@ function drawShadow(b1, b2, b3, intersection1, intersection2, intersection3) {
 
 function resizeObserver() {
 	const resizeObserver = new ResizeObserver(entries => {
-		// console.log(entries[0].target.getBoundingClientRect())
 		orchestrateCoordinates()
 	})
 	resizeObserver.observe(document.querySelector('.animate'))
@@ -80,4 +108,5 @@ function orchestrateCoordinates() {
 }
 	
 resizeObserver()
+createCubeScene()
 module.exports = { getFormula, getIntersectionCoordinates, testTest, orchestrateCoordinates }
