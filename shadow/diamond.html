@@ -4,6 +4,8 @@
 	<style>
 		body {
 			background-color: rgb(223, 197, 223);
+			/* overflow: hidden; */
+			margin: 0;
 		}
 		.scene {
 			width: 100px;
@@ -11,8 +13,8 @@
 			/* background-color: gray; */
 			perspective: 600px;
 			position: absolute;
-			top: 500px;
-			left:520px;
+			top: 100px;
+			left:100px;
 			z-index: 1;
 		}
 
@@ -61,7 +63,7 @@
 		}
 
 		.animate {
-			height: 90%;
+			height: 100%;
 			animation-duration: 3s;
 			animation-direction: alternate;
 			animation-iteration-count: infinite;
@@ -88,12 +90,6 @@
 			from {height: 10%;}
 			to {height: 100%;}
 		}
-		.cube.show-front  { transform: translateZ(-100px) rotateY(  0deg); }
-		.cube.show-right  { transform: translateZ(-100px) rotateY( -90deg); }
-		.cube.show-back   { transform: translateZ(-100px) rotateY(-180deg); }
-		.cube.show-left   { transform: translateZ(-100px) rotateY(  90deg); }
-		.cube.show-top    { transform: translateZ(-100px) rotateX( -90deg); }
-		.cube.show-bottom { transform: translateZ(-100px) rotateX(  90deg); }
 
 		</style>
 		</head>

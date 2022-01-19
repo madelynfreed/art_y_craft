@@ -14,6 +14,10 @@ function createCubeScene() {
 	const child_left = document.createElement('div');
 
 	scene.setAttribute("class", "scene")
+	scene.style = `
+	background-color: pink;
+	position: relative;
+	`
 	cube.setAttribute('class', 'cube' );
 	cube_front.setAttribute('class','cube__face cube__face--front');
 	cube_back.setAttribute('class','cube__face cube__face--back');
@@ -27,6 +31,11 @@ function createCubeScene() {
 
 	scene.appendChild(cube)
 	cube.append(cube_front, cube_back, cube_right, cube_left, cube_top, cube_bottom)
+	cube_front.appendChild(child_front)
+	cube_back.appendChild(child_back)
+	cube_left.appendChild(child_left)
+
+	document.body.appendChild(scene)
 }
 function appendDiv(x, y, logIt = false) {
 	const shadowTag = document.createElement('div');
@@ -47,11 +56,13 @@ function appendDiv(x, y, logIt = false) {
 function getCoordinate([cube_side, ySide], [other_cube_side, xSide]) {
 	const yelement = document.querySelector(`.cube__child--${cube_side}`);
 	const r = yelement.getBoundingClientRect()
-	const y = Math.round(r[ySide])
+	// const y = Math.round(r[ySide])
+	const y = r[ySide]
 
 	const xelement = document.querySelector(`.cube__child--${other_cube_side}`);
 	const s = xelement.getBoundingClientRect()
-	const x = Math.round(s[xSide])
+	// const x = Math.round(s[xSide])
+	const x = s[xSide]
 
 	return { x, y }
 }
@@ -66,8 +77,8 @@ function getIntersectionCoordinates(
 	const m2 = (lightBottom.y - coordinateBottom.y) / (lightBottom.x - coordinateBottom.x)
 	const b1 = lightSource.y - (m1 * lightSource.x)
 	const b2 = lightBottom.y - (m2 * lightBottom.x)
-	const x = Math.round((b2 - b1) / (m1 - m2))
-	const y = Math.round(m1 * x + b1)
+	const x = ((b2 - b1) / (m1 - m2))
+	const y = (m1 * x + b1)
 	return { x, y }
 }
 
@@ -88,6 +99,7 @@ function resizeObserver() {
 	})
 	resizeObserver.observe(document.querySelector('.animate'))
 }
+var fart = 'not a fart'
 
 function orchestrateCoordinates() {
 	const b1 = getCoordinate(['bottom', 'bottom'], ['bottom', 'left'])
@@ -109,4 +121,4 @@ function orchestrateCoordinates() {
 	
 resizeObserver()
 createCubeScene()
-module.exports = { getFormula, getIntersectionCoordinates, testTest, orchestrateCoordinates }
+// module.exports = { getFormula, getIntersectionCoordinates, testTest, orchestrateCoordinates }
