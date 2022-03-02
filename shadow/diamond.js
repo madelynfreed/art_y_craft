@@ -1,6 +1,7 @@
 const shadowColor = `blue`
 
-function createCubeScene() {
+function createCubeScene(id, topCoordinates, leftCoordinates) {
+	console.log(id)
 	const scene = document.createElement('div');
 	const cube = document.createElement('div');
 	const cube_front = document.createElement('div');
@@ -12,11 +13,12 @@ function createCubeScene() {
 	const child_front = document.createElement('div');
 	const child_back = document.createElement('div');
 	const child_left = document.createElement('div');
+	const shadow = document.createElement('div');
 
 	scene.setAttribute("class", "scene")
 	scene.style = `
-	background-color: pink;
-	position: relative;
+			top: ${topCoordinates};
+			left:${leftCoordinates};
 	`
 	cube.setAttribute('class', 'cube' );
 	cube_front.setAttribute('class','cube__face cube__face--front');
@@ -29,6 +31,10 @@ function createCubeScene() {
 	child_back.setAttribute('class', 'cube__child--back animate');
 	child_left.setAttribute('class', 'cube__child--left animate');
 
+	cube.setAttribute('id', id );
+	shadow.setAttribute('id', id);
+	shadow.setAttribute('class', shadow);
+
 	scene.appendChild(cube)
 	cube.append(cube_front, cube_back, cube_right, cube_left, cube_top, cube_bottom)
 	cube_front.appendChild(child_front)
@@ -36,7 +42,9 @@ function createCubeScene() {
 	cube_left.appendChild(child_left)
 
 	document.body.appendChild(scene)
+	document.body.appendChild(shadow)
 }
+
 function appendDiv(x, y, logIt = false) {
 	const shadowTag = document.createElement('div');
 	shadowTag.style = `
@@ -53,15 +61,17 @@ function appendDiv(x, y, logIt = false) {
 	document.body.appendChild(shadowTag);
 }
 
-function getCoordinate([cube_side, ySide], [other_cube_side, xSide]) {
-	const yelement = document.querySelector(`.cube__child--${cube_side}`);
+function getCoordinate(id, [cube_side, ySide], [other_cube_side, xSide]) {
+	const yelement = document.getElementById(id).querySelector(`.cube__child--${cube_side}`)
+	// console.log(yelement)
+	// const yelement = document.querySelector(`.cube__child--${cube_side}`);
 	const r = yelement.getBoundingClientRect()
-	// const y = Math.round(r[ySide])
 	const y = r[ySide]
 
-	const xelement = document.querySelector(`.cube__child--${other_cube_side}`);
+	// const xelement = document.querySelector(`.cube__child--${other_cube_side}`);
+	const xelement = document.getElementById(id).querySelector(`.cube__child--${other_cube_side}`)
+	// console.log(xelement)
 	const s = xelement.getBoundingClientRect()
-	// const x = Math.round(s[xSide])
 	const x = s[xSide]
 
 	return { x, y }
@@ -82,8 +92,9 @@ function getIntersectionCoordinates(
 	return { x, y }
 }
 
-const shadowTag = document.querySelector('#shadow')
 function drawShadow(b1, b2, b3, intersection1, intersection2, intersection3) {
+	// const shadowTag = document.getElementById(1).querySelector('#shadow')
+	const shadowTag = document.getElementById('1 shadow')
 	shadowTag.style = `
 			width: 100vw;
 			height: 100vh;
@@ -95,19 +106,18 @@ function drawShadow(b1, b2, b3, intersection1, intersection2, intersection3) {
 
 function resizeObserver() {
 	const resizeObserver = new ResizeObserver(entries => {
-		orchestrateCoordinates()
+		orchestrateCoordinates(1)
 	})
 	resizeObserver.observe(document.querySelector('.animate'))
 }
-var fart = 'not a fart'
 
-function orchestrateCoordinates() {
-	const b1 = getCoordinate(['bottom', 'bottom'], ['bottom', 'left'])
-	const b2 = getCoordinate(['bottom', 'top'], ['left', 'right'])
-	const b3 = getCoordinate(['bottom', 'top'], ['right', 'left'])
-	const t1 = getCoordinate(['front', 'bottom'], ['front', 'left'])
-	const t2 = getCoordinate(['back', 'top'], ['back', 'left'])
-	const t3 = getCoordinate(['back', 'top'], ['back', 'right'])
+function orchestrateCoordinates(id) {
+	const b1 = getCoordinate(id, ['bottom', 'bottom'], ['bottom', 'left'])
+	const b2 = getCoordinate(id, ['bottom', 'top'], ['left', 'right'])
+	const b3 = getCoordinate(id, ['bottom', 'top'], ['right', 'left'])
+	const t1 = getCoordinate(id, ['front', 'bottom'], ['front', 'left'])
+	const t2 = getCoordinate(id, ['back', 'top'], ['back', 'left'])
+	const t3 = getCoordinate(id, ['back', 'top'], ['back', 'right'])
 
 	const lt = {x: 1520, y: 234}
 	const lb = {x: 1520, y: 734}
@@ -116,9 +126,10 @@ function orchestrateCoordinates() {
 	const intersection2 = getIntersectionCoordinates(lt, t2, lb, b2);
 	const intersection3 = getIntersectionCoordinates(lt, t3, lb, b3);
 
+	// console.log(b1, b2, b3, intersection1, intersection2, intersection3)
 	drawShadow(b1, b2, b3, intersection1, intersection2, intersection3)
 }
 	
 resizeObserver()
-createCubeScene()
+createCubeScene(0, '200px','200px')
 // module.exports = { getFormula, getIntersectionCoordinates, testTest, orchestrateCoordinates }
